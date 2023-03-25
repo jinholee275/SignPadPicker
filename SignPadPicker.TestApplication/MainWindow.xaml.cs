@@ -62,9 +62,17 @@ namespace SignPadPicker.TestApplication
 
                 SetResults(filePath, new string[] { });
             }
-            catch (SignPadNotAvailableException)
+            catch (SignPadNotInstalledException ex)
+            {
+                MessageBox.Show("사인패드 제어 프로그램 설치가 필요합니다.");
+            }
+            catch (SignPadNotAvailableException ex)
             {
                 MessageBox.Show("현재 PC에 연결되어 있는 전자서명 패드 장비가 없거나 연결 실패 하였습니다.");
+            }
+            catch (SignFailException ex)
+            {
+                MessageBox.Show("서명 취소 또는 시간이 초과되었습니다.");
             }
             catch (SignCancelException)
             {

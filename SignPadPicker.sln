@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.MspSignPadAda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.MipSignPadAdaptor", "SignPadPicker.MipSignPadAdaptor\SignPadPicker.MipSignPadAdaptor.csproj", "{6E3F2F42-FC0F-4D93-BCAD-919D3CEB55FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.EasyCardKSignPadAdaptor", "SignPadPicker.EasyCardKSignPadAdaptor\SignPadPicker.EasyCardKSignPadAdaptor.csproj", "{40B20995-7687-46BB-8A3B-BA240C062FC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,11 @@ Global
 		{6E3F2F42-FC0F-4D93-BCAD-919D3CEB55FE}.Debug|x86.Build.0 = Debug|x86
 		{6E3F2F42-FC0F-4D93-BCAD-919D3CEB55FE}.Release|Any CPU.ActiveCfg = Release|x86
 		{6E3F2F42-FC0F-4D93-BCAD-919D3CEB55FE}.Release|x86.ActiveCfg = Release|x86
+		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Debug|x86.ActiveCfg = Debug|x86
+		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Debug|x86.Build.0 = Debug|x86
+		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Release|Any CPU.ActiveCfg = Release|x86
+		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

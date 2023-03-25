@@ -4,31 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CE4F451D-09B6-4310-8630-2DC37FF5CBDD}</ProjectGuid>
+    <ProjectGuid>{40B20995-7687-46BB-8A3B-BA240C062FC6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SignPadPicker</RootNamespace>
-    <AssemblyName>SignPadPicker</AssemblyName>
+    <RootNamespace>SignPadPicker.Adaptor</RootNamespace>
+    <AssemblyName>SignPadPicker.EasyCardKSignPadAdaptor</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -49,8 +32,11 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
+    <Reference Include="Interop.WinHttp, Version=5.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\Interop.WinHttp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,21 +44,19 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\SignFailException.cs" />
-    <Compile Include="Exceptions\SignCancelException.cs" />
-    <Compile Include="Exceptions\EmptySignException.cs" />
-    <Compile Include="Exceptions\SignPadNotAvailableException.cs" />
-    <Compile Include="Exceptions\SignPadNotInstalledException.cs" />
-    <Compile Include="NotifyPropertyImpl.cs" />
-    <Compile Include="RelayCommand.cs" />
-    <Compile Include="SignPadLoader.cs" />
+    <Compile Include="EasyCardKSignPad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ISignPadPlugin.cs" />
-    <Compile Include="SignResult.cs" />
-    <Compile Include="VisualCaptureExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SignPadPicker\SignPadPicker.csproj">
+      <Project>{ce4f451d-09b6-4310-8630-2dc37ff5cbdd}</Project>
+      <Name>SignPadPicker</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Interop.WinHttp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
