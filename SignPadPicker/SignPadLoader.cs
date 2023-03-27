@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,18 +11,14 @@ namespace SignPadPicker
         public static List<ISignPadPlugin> Plugins { get; set; }
 
         public static ISignPadPlugin GetPlugin(string name)
-        {
-            ISignPadPlugin plugin = Plugins.Where(p => p.Name == name).FirstOrDefault();
+            => Plugins
+            .FirstOrDefault(p => p.Name == name)
+            ?? throw new Exception($"No plugin found with name '{name}'");
 
-            return plugin ?? throw new Exception($"No plugin found with name '{name}'");
-        }
-
-        public static ISignPadPlugin GetAnyPlugin()
-        {
-            ISignPadPlugin plugin = Plugins.Where(p => p.IsAvailable).FirstOrDefault();
-
-            return plugin ?? throw new Exception($"No plugin found.");
-        }
+        public static ISignPadPlugin GetAnyPlugin(IEnumerable<string> names = null)
+            => (names.Select(name => GetPlugin(name)) ?? Plugins)
+            .FirstOrDefault(p => CheckPluginIsAvailable(p))
+            ?? throw new Exception($"No plugin found.");
 
         public void LoadPlugins(string path)
         {
@@ -34,7 +29,7 @@ namespace SignPadPicker
             LoadPluginInstance();
         }
 
-        void LoadPluginAssemblyFile(string path) =>
+        private void LoadPluginAssemblyFile(string path) =>
             Directory.GetFiles(path).ToList()
                 .Where(file =>
                 {
@@ -50,5 +45,11 @@ namespace SignPadPicker
                 .Where(p => typeof(ISignPadPlugin).IsAssignableFrom(p) && p.IsClass)
                 .ToList()
                 .ForEach(type => Plugins.Add((ISignPadPlugin)Activator.CreateInstance(type)));
+
+        private static bool CheckPluginIsAvailable(ISignPadPlugin plugin)
+        {
+            try { return plugin.IsAvailable; }
+            catch { return false; }
+        }
     }
 }
