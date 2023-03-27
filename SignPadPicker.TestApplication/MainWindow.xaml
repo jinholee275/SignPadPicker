@@ -16,6 +16,7 @@
                 <Button Content="KscatSignPad" Click="ActivateBtn_Click" Tag="KscatSignPad" />
                 <Button Content="EasyCardKSignPad" Click="ActivateBtn_Click" Tag="EasyCardKSignPad" />
                 <Button Content="NiceSignPad" Click="ActivateBtn_Click" Tag="NiceSignPad" />
+                <Button Content="SmartroSignPad" Click="ActivateBtn_Click" Tag="SmartroSignPad" />
             </StackPanel>
             <Grid>
                 <Grid.RowDefinitions>

@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.MipSignPadAda
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.EasyCardKSignPadAdaptor", "SignPadPicker.EasyCardKSignPadAdaptor\SignPadPicker.EasyCardKSignPadAdaptor.csproj", "{40B20995-7687-46BB-8A3B-BA240C062FC6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignPadPicker.SmartroSignPadAdaptor", "SignPadPicker.SmartroSignPadAdaptor\SignPadPicker.SmartroSignPadAdaptor.csproj", "{884D83D2-687A-4E8D-9E5B-BA546786547A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,11 @@ Global
 		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Debug|x86.Build.0 = Debug|x86
 		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Release|Any CPU.ActiveCfg = Release|x86
 		{40B20995-7687-46BB-8A3B-BA240C062FC6}.Release|x86.ActiveCfg = Release|x86
+		{884D83D2-687A-4E8D-9E5B-BA546786547A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{884D83D2-687A-4E8D-9E5B-BA546786547A}.Debug|x86.ActiveCfg = Debug|x86
+		{884D83D2-687A-4E8D-9E5B-BA546786547A}.Debug|x86.Build.0 = Debug|x86
+		{884D83D2-687A-4E8D-9E5B-BA546786547A}.Release|Any CPU.ActiveCfg = Release|x86
+		{884D83D2-687A-4E8D-9E5B-BA546786547A}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
