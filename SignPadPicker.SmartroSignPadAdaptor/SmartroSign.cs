@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Windows;
 
 namespace SignPadPicker.Adaptor
 {
@@ -14,9 +11,9 @@ namespace SignPadPicker.Adaptor
         /// Return Type: int
         ///iPortNum: int
         ///lBaud: int
-        [System.Runtime.InteropServices.DllImportAttribute(@"C:\Hanuriit\SmartroSign.dll",
+        [DllImport(@"C:\Hanuriit\SmartroSign.dll",
         EntryPoint = "SMT_Dongle_Start",
-        CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
+        CallingConvention = CallingConvention.StdCall)]
         public static extern int SMT_Dongle_Start(
             int iPortNum,
             int lBaud);
@@ -24,17 +21,17 @@ namespace SignPadPicker.Adaptor
         /// Return Type: int
         ///iFlag: int
         ///ucpSignpadInfo: BYTE*
-        [System.Runtime.InteropServices.DllImportAttribute(@"C:\Hanuriit\SmartroSign.dll",
+        [DllImport(@"C:\Hanuriit\SmartroSign.dll",
         EntryPoint = "SMT_Dongle_Initial",
-        CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
+        CallingConvention = CallingConvention.StdCall)]
         public static extern int SMT_Dongle_Initial(
             int iFlag,
             ref byte ucpSignpadInfo);
 
         /// Return Type: int
-        [System.Runtime.InteropServices.DllImportAttribute(@"C:\Hanuriit\SmartroSign.dll",
+        [DllImport(@"C:\Hanuriit\SmartroSign.dll",
         EntryPoint = "SMT_Dongle_Stop",
-        CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
+        CallingConvention = CallingConvention.StdCall)]
         public static extern int SMT_Dongle_Stop();
 
         /// Return Type: int
@@ -48,9 +45,9 @@ namespace SignPadPicker.Adaptor
         ///ucpPadVersion: BYTE*
         ///ucpHashData: BYTE*
         ///ucpImgFileNm: BYTE*
-        [System.Runtime.InteropServices.DllImportAttribute(@"C:\Hanuriit\SmartroSign.dll",
+        [DllImport(@"C:\Hanuriit\SmartroSign.dll",
         EntryPoint = "SMT_Get_Sign_Screen_Free",
-        CallingConvention = System.Runtime.InteropServices.CallingConvention.StdCall)]
+        CallingConvention = CallingConvention.StdCall)]
         public static extern int SMT_Get_Sign_Screen_Free(
             ref byte cpWorkingKey,
             byte cKeyIndex,

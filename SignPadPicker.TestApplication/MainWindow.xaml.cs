@@ -1,5 +1,6 @@
 ﻿using SignPadPicker.Exceptions;
 using System;
+using System.Collections;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -50,27 +51,40 @@ namespace SignPadPicker.TestApplication
             ResultTbx.Text = sb.ToString();
         }
 
-        private void ActivateSignPad(string pluginName = null)
+        private void ActivateSignPad(string pluginName = "")
         {
             try
             {
-                ISignPadPlugin plugin = string.IsNullOrEmpty(pluginName)
-                    ? SignPadLoader.GetAnyPlugin()
-                    : SignPadLoader.GetPlugin(pluginName);
+                ISignPadPlugin plugin;
+
+                if (string.IsNullOrEmpty(pluginName))
+                {
+                    plugin = SignPadLoader.GetPlugin();
+                }
+                else
+                {
+                    plugin = pluginName.Split(',').Length > 1
+                        ? SignPadLoader.GetPlugin(pluginName.Split(','))
+                        : SignPadLoader.GetPlugin(pluginName);
+                }
 
                 string filePath = plugin.Activate();
 
                 SetResults(filePath, new string[] { });
             }
-            catch (SignPadNotInstalledException ex)
+            catch (NoPluginFoundException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            catch (SignPadNotInstalledException)
             {
                 MessageBox.Show("사인패드 제어 프로그램 설치가 필요합니다.");
             }
-            catch (SignPadNotAvailableException ex)
+            catch (SignPadNotAvailableException)
             {
                 MessageBox.Show("현재 PC에 연결되어 있는 전자서명 패드 장비가 없거나 연결 실패 하였습니다.");
             }
-            catch (SignFailException ex)
+            catch (SignFailException)
             {
                 MessageBox.Show("서명 취소 또는 시간이 초과되었습니다.");
             }

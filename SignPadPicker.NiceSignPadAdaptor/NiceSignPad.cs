@@ -10,8 +10,24 @@ namespace SignPadPicker.Adaptor
         public string Name => "NiceSignPad";
 
         public string Description => "NiceSignPad Plugin";
-        
-        public bool IsAvailable => throw new NotImplementedException();
+
+        public bool IsAvailable
+        {
+            get
+            {
+                NiceSignPadUserControl uc = new NiceSignPadUserControl();
+
+                if (uc.DataContext is NiceSignPadViewModel vm)
+                {
+                    if (!vm.OpenPort())
+                        return false;
+
+                    vm.ClosePort();
+                }
+
+                return true;
+            }
+        }
 
         public string Activate()
         {

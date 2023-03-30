@@ -10,7 +10,14 @@ namespace SignPadPicker.MspSignPadAdaptor
 
         public string Description => "MspSignPad Plugin";
 
-        public bool IsAvailable => GetDeviceState() == 1 && SetPadConnect() == 0;
+        public bool IsAvailable
+        {
+            get
+            {
+                try { return GetDeviceState() == 1 && SetPadConnect() == 0; }
+                catch { return false; }
+            }
+        }
 
         #region DllImports
 

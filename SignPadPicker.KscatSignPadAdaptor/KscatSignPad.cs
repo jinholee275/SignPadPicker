@@ -14,7 +14,21 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "KscatSignPad Plugin";
 
-        public bool IsAvailable => throw new NotImplementedException();
+        public bool IsAvailable
+        {
+            get
+            {
+                try
+                {
+                    Init();
+                    return true;
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+        }
 
         #region DllImports
 

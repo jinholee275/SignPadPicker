@@ -111,7 +111,7 @@ namespace SignPadPicker.Adaptor
                 SignImgFilePath = filePath,
             };
 
-            Owner.DialogResult = true;
+            if (Owner != null) Owner.DialogResult = true;
         }
 
         private void Clear()
@@ -126,7 +126,7 @@ namespace SignPadPicker.Adaptor
                 Exception = new SignCancelException(),
             };
 
-            Owner.DialogResult = false;
+            if (Owner != null) Owner.DialogResult = false;
         }
     }
 }

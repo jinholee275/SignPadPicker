@@ -11,7 +11,14 @@ namespace SignPadPicker.MipSignPadAdaptor
 
         public string Description => "MipSignPad Plugin";
 
-        public bool IsAvailable => AutoComPort() == 0;
+        public bool IsAvailable
+        {
+            get
+            {
+                try { return AutoComPort() == 0; }
+                catch { return false; }
+            }
+        }
 
         #region DllImports
 

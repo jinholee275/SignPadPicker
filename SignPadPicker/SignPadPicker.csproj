@@ -61,6 +61,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\NoPluginFoundException.cs" />
     <Compile Include="Exceptions\SignFailException.cs" />
     <Compile Include="Exceptions\SignCancelException.cs" />
     <Compile Include="Exceptions\EmptySignException.cs" />

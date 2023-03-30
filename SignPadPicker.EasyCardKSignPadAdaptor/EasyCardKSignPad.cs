@@ -16,7 +16,16 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "EasyCardKSignPad Plugin";
 
-        public bool IsAvailable => throw new NotImplementedException();
+        public bool IsAvailable
+        {
+            get
+            {
+                try { throw new NotImplementedException(); }
+                catch { return false; }
+            }
+        }
+
+        private static readonly string iniFilePath = @"C:\Kicc\EasyCardK\SETUP\OPTION.ini";
 
         #region DllImports
 
@@ -29,7 +38,7 @@ namespace SignPadPicker.Adaptor
         {
             if (!RunSignPadAppIfNotRunning())
             {
-                throw new SignPadNotInstalledException("Kicc 프로그램 설치가 필요합니다. \r\n1. EasyCardK \r\n2. EzMSR \r\n설치경로 : C:\\Kicc");
+                throw new SignPadNotInstalledException();
             }
 
             string signData = OnSignPad();
@@ -186,6 +195,11 @@ namespace SignPadPicker.Adaptor
         /// </summary>
         private string GetPort()
         {
+            if (!File.Exists(iniFilePath))
+            {
+                throw new SignPadNotInstalledException();
+            }
+
             StringBuilder retPort = new StringBuilder();
 
             // 서명패드 PORT가 설정된 ini파일 읽어오기
@@ -194,7 +208,7 @@ namespace SignPadPicker.Adaptor
 
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                GetPrivateProfileString("SETUP", "HTTP_PORT", "", retPort, 32, @"C:\Kicc\EasyCardK\SETUP\OPTION.ini");
+                GetPrivateProfileString("SETUP", "HTTP_PORT", "", retPort, 32, iniFilePath);
             }
 
             if (string.IsNullOrEmpty(retPort.ToString()))

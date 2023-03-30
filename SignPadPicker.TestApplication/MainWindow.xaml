@@ -9,8 +9,9 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <StackPanel Width="260">
-                <Button Content="Activate any signpad" Click="ActivateBtn_Click" Tag="AnySignPad" />
+                <Button Content="Activate any signpad" Click="ActivateBtn_Click" Tag="" />
                 <Button Content="ScreenSignPad" Click="ActivateBtn_Click" Tag="ScreenSignPad" />
+                <Button Content="MspSignPad,MipSignPad" Click="ActivateBtn_Click" Tag="MspSignPad,MipSignPad" />
                 <Button Content="MspSignPad" Click="ActivateBtn_Click" Tag="MspSignPad" />
                 <Button Content="MipSignPad" Click="ActivateBtn_Click" Tag="MipSignPad" />
                 <Button Content="KscatSignPad" Click="ActivateBtn_Click" Tag="KscatSignPad" />

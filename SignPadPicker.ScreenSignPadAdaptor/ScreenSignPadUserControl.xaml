@@ -9,18 +9,13 @@
     <UserControl.DataContext>
         <local:ScreenSignPadViewModel />
     </UserControl.DataContext>
-    <!--<UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <SharedResourceDictionary Source="/EzForm.PresentationUI;component/Assets/Brushs.xaml" />
-                <SharedResourceDictionary Source="/EzForm.Editor.Design;component/Assets/Icon.White.xaml" />
-                <SharedResourceDictionary Source="/EzForm.Editor.Design;component/Assets/Menu.White.xaml" />
-                <SharedResourceDictionary Source="/EzForm.Editor.Design;component/Assets/Geometry.White.xaml" />
-                <SharedResourceDictionary Source="/EzForm.Editor.Design;component/Assets/Generic.White.xaml" />
-                <SharedResourceDictionary Source="/EzForm.CreatorUI;component/Resources/CreatorUIResource.xaml"/>
+                <ResourceDictionary Source="/SignPadPicker.ScreenSignPadAdaptor;component/Assets/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>-->
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -33,9 +28,9 @@
             <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Save}" ButtonStyle="Save" Width="100" Height="30" Margin="5" Command="{Binding SaveCommand}" />-->
             <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Clear}" ButtonStyle="Delete" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" />-->
             <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Close}" ButtonStyle="Close" Width="100" Height="30" Margin="5" Command="{Binding CloseCommand}" />-->
-            <Button Content="{Binding ConfirmBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ConfirmCommand}" />
-            <Button Content="{Binding ClearBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" />
-            <Button Content="{Binding CancelBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding CancelCommand}" />
+            <Button Content="{Binding ConfirmBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ConfirmCommand}" Style="{StaticResource SaveButtonStyle}" />
+            <Button Content="{Binding ClearBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" Style="{StaticResource DeleteButtonStyle}" />
+            <Button Content="{Binding CancelBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding CancelCommand}" Style="{StaticResource CloseButtonStyle}" />
         </StackPanel>
     </Grid>
 </UserControl>

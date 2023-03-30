@@ -2,9 +2,9 @@
 using SignPadPicker.Exceptions;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms.Integration;
-using System.Windows.Ink;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -35,9 +35,6 @@ namespace SignPadPicker.Adaptor
 
         private WindowsFormsHost signPad = new WindowsFormsHost();
         public WindowsFormsHost SignPad { get => signPad; set { signPad = value; OnPropertyChanged(() => SignPad); } }
-
-        private StrokeCollection _strokes = new StrokeCollection();
-        public StrokeCollection Strokes { get => _strokes; set { _strokes = value; OnPropertyChanged(() => Strokes); } }
 
         #endregion
 
@@ -71,27 +68,8 @@ namespace SignPadPicker.Adaptor
 
         internal void Activate()
         {
-            if (axSignPos == null)
+            if (!OpenPort())
             {
-                Result = new SignResult
-                {
-                    Exception = new SignPadNotAvailableException(),
-                };
-
-                Owner.DialogResult = false;
-                return;
-            }
-
-            int result = axSignPos.OpenPort(PORT_NUMBER, 115200);
-
-            if (result == 0)
-            {
-                Result = new SignResult
-                {
-                    Exception = new SignPadNotAvailableException(),
-                };
-
-                Owner.DialogResult = false;
                 return;
             }
 
@@ -103,6 +81,40 @@ namespace SignPadPicker.Adaptor
             _timer.Tick += Timer_Tick;
             _timer.Interval = new TimeSpan(0, 0, 3);
             _timer.Start();
+        }
+
+        public bool OpenPort()
+        {
+            if (axSignPos == null)
+            {
+                Result = new SignResult
+                {
+                    Exception = new SignPadNotAvailableException(),
+                };
+
+                if (Owner != null) Owner.DialogResult = false;
+                return false;
+            }
+
+            int result = axSignPos.OpenPort(PORT_NUMBER, 115200);
+
+            if (result == 0)
+            {
+                Result = new SignResult
+                {
+                    Exception = new SignPadNotAvailableException(),
+                };
+
+                if (Owner != null) Owner.DialogResult = false;
+                return false;
+            }
+
+            return true;
+        }
+
+        public void ClosePort()
+        {
+            axSignPos?.ClosePort();
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -134,26 +146,26 @@ namespace SignPadPicker.Adaptor
                 result = false;
             }
 
-            axSignPos.ClosePort();
+            ClosePort();
 
             Result = new SignResult
             {
                 SignImgFilePath = result ? destFileName : null,
             };
 
-            Owner.DialogResult = result;
+            if (Owner != null) Owner.DialogResult = result;
         }
 
         private void Close()
         {
-            axSignPos.ClosePort();
+            ClosePort();
 
             Result = new SignResult
             {
                 Exception = new SignCancelException(),
             };
 
-            Owner.DialogResult = false;
+            if (Owner != null) Owner.DialogResult = false;
         }
     }
 }

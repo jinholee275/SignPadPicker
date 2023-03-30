@@ -2,6 +2,7 @@
 using SignPadPicker.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -51,9 +52,13 @@ namespace SignPadPicker.Adaptor
                     Exception = new SignPadNotAvailableException(),
                 };
 
-                Owner.DialogResult = false;
+                if (Owner != null) Owner.DialogResult = false;
                 return;
             }
+
+            string signImgPath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
+
+
         }
     }
 }
