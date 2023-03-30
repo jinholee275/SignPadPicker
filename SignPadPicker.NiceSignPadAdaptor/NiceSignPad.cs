@@ -59,7 +59,7 @@ namespace SignPadPicker.Adaptor
             Window win = new Window
             {
                 Owner = Application.Current.MainWindow,
-                Title = "NiceSignPad",
+                //Title = "",
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,
@@ -71,6 +71,7 @@ namespace SignPadPicker.Adaptor
                     - winSize.Height / 2,
                 Width = winSize.Width,
                 Height = winSize.Height,
+                WindowStyle = WindowStyle.None,
             };
 
             NiceSignPadUserControl uc = new NiceSignPadUserControl();

@@ -42,7 +42,7 @@ namespace SignPadPicker.Adaptor
             Window win = new Window
             {
                 Owner = Application.Current.MainWindow,
-                Title = "",
+                //Title = "",
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,
@@ -52,7 +52,7 @@ namespace SignPadPicker.Adaptor
                     + Screen.PrimaryScreen.WorkingArea.Height / 2 - winSize.Height / 2,
                 Width = winSize.Width,
                 Height = winSize.Height,
-                WindowStyle = WindowStyle.ToolWindow,
+                WindowStyle = WindowStyle.None,
             };
 
             ScreenSignPadUserControl uc = new ScreenSignPadUserControl();

@@ -1,0 +1,136 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:options="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:local="clr-namespace:SignPadPicker.Adaptor">
+
+    <Color options:Freeze="true" x:Key="AccentColorKey">#1ba1e2</Color>
+    <Color options:Freeze="true" x:Key="WindowBackgroundColorKey">#FFFFFF</Color>
+
+    <SolidColorBrush options:Freeze="true" x:Key="IconNormalBackground" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="ButtonBackgroundHoverKey" Color="#3e3e42" />
+    <SolidColorBrush x:Key="WindowBorderActiveKey" Color="{StaticResource AccentColorKey}" />
+    <SolidColorBrush x:Key="WindowBorderKey" Color="{StaticResource AccentColorKey}" Opacity=".5" />
+    <SolidColorBrush x:Key="WindowBackgroundKey" Color="{StaticResource WindowBackgroundColorKey}" />
+    <SolidColorBrush x:Key="WindowTextKey" Color="#181d27" />
+
+    <LinearGradientBrush options:Freeze="true" x:Key="ButtonRedBackgroundKey" EndPoint="0.5,1" StartPoint="0.5,0"  >
+        <GradientStop Color="#FF9b3c3e" Offset="0"/>
+        <GradientStop Color="#FF601416" Offset="1"/>
+    </LinearGradientBrush>
+
+    <StreamGeometry options:Freeze="true" x:Key="DeleteGeometry">M1.040899,0 C1.3072898,0 1.5736806,0.10162347 1.7769276,0.30487049 L4.5000105,3.0279535 7.2231072,0.30487049 C7.6296008,-0.10162347 8.2886358,-0.10162347 8.6951294,0.30487049 9.1016233,0.7113643 9.1016233,1.3703987 8.6951294,1.7768926 L5.9720462,4.4999894 8.6951294,7.2230722 C9.1016233,7.6295663 9.1016233,8.2886356 8.6951294,8.6951289 8.2886358,9.1016234 7.6296008,9.1016234 7.2231072,8.6951289 L4.5000105,5.9720323 1.7769276,8.6951289 C1.3704337,9.1016234 0.71136437,9.1016234 0.30487042,8.6951289 -0.10162347,8.2886356 -0.10162347,7.6295663 0.30487042,7.2230722 L3.0279673,4.4999894 0.30487042,1.7768926 C-0.10162347,1.3703987 -0.10162347,0.7113643 0.30487042,0.30487049 0.50811744,0.10162347 0.77450821,0 1.040899,0 z</StreamGeometry>
+    <StreamGeometry options:Freeze="true" x:Key="SaveGeometry">M6.5,1.5294117 L6.5,4.7316176 8.4117647,4.7316176 8.4117647,1.5294117 z M1.7205882,1.5294117 L1.7205882,11.470588 11.470588,11.470588 11.470588,2.2602515 10.739749,1.5294117 9.75,1.5294117 9.75,5.6875 2.4852941,5.6875 2.4852941,1.5294117 z M0,0 L11.664578,0 13,1.3354219 13,13 0,13 z</StreamGeometry>
+    <StreamGeometry options:Freeze="true" x:Key="SignatureGeometry">M14.999999,0 C14.999999,1.494791E-07 14.363977,0.21872379 12.066465,4.0201829 11.344748,4.4443312 8.4821739,5.0996645 7.2602799,5.221919 7.2602799,5.221919 9.5534873,5.691802 10.768436,5.5903333 10.726895,5.6610289 10.691402,5.7267249 10.649016,5.798245 9.5610054,7.754372 6.8921896,7.723796 5.3213384,7.5111431 L5.3011588,7.5083306 5.4012484,7.6157353 C6.1150029,8.3700428 7.1969195,9.3002829 8.4138206,9.6119424 8.4138206,9.6119424 5.2308634,9.4905658 3.7634515,8.2182157 L3.738808,8.1960863 3.6536305,8.3020451 C2.3354521,9.9625711 1.0547078,11.871855 0,14.000001 0,14.000001 1.1216208,7.2506398 7.0925178,3.0564214 L7.2005976,2.981518 7.2127236,2.9660692 C7.2347904,2.9379753 7.2464419,2.9232398 7.2464419,2.9232398 7.3875481,2.8367225 7.5274072,2.7527581 7.6659589,2.6712711 L7.6744323,2.6663396 7.7893844,2.5930199 C8.86636,1.9157905 10.087225,1.3223657 11.470232,0.85830627 L11.46992,0.85851511 11.528727,0.83700162 C13.671059,0.063485088 14.999999,1.494791E-07 14.999999,0 z</StreamGeometry>
+    <StreamGeometry options:Freeze="true" x:Key="WastebasketGeometry">M5.4564415,4.6093359 C5.2014421,4.6093361 4.9946626,4.7980662 4.9946626,5.0308072 L4.9946626,11.570311 C4.9946626,11.803052 5.2014421,11.991717 5.4564415,11.991717 5.7114413,11.991717 5.9181492,11.803052 5.9181492,11.570311 L5.9181492,5.0308072 C5.9181492,4.7980662 5.7114413,4.6093361 5.4564415,4.6093359 z M2.7349548,4.6093359 C2.4838689,4.6093361 2.2873879,4.7980662 2.2962065,5.0308072 L2.5425658,11.570311 C2.5513142,11.803052 2.7619752,11.991717 3.0130617,11.991717 3.2641478,11.991717 3.4606283,11.803052 3.4518098,11.570311 L3.2054504,5.0308072 C3.1967024,4.7980662 2.9860409,4.6093361 2.7349548,4.6093359 z M8.163854,4.6093351 C7.9127822,4.609335 7.7021337,4.7980651 7.6933854,5.0308065 L7.4470413,11.570312 C7.4382231,11.803052 7.6346914,11.991715 7.8857638,11.991715 8.1368358,11.991715 8.3474842,11.803052 8.3562326,11.570312 L8.6026476,5.0308065 C8.6113949,4.7980651 8.4149264,4.609335 8.163854,4.6093351 z M0.75609091,3.4841566 L10.278264,3.4841566 9.8220541,11.956661 C9.7910343,12.532845 9.2859634,13 8.6940008,13 L2.5253589,13 2.34038,12.999999 C1.7483413,12.999999 1.2432626,12.532844 1.2122436,11.95666 z M0.75815477,1.4116772 L10.241912,1.4116772 C10.660589,1.4116772 11,1.7550722 11,2.1786649 11,2.6022576 10.660589,2.9457203 10.241912,2.9457203 L0.75815477,2.9457203 C0.3394773,2.9457203 6.5266511E-08,2.6022576 0,2.1786649 6.5266511E-08,1.7550722 0.3394773,1.4116772 0.75815477,1.4116772 z M4.4664093,0 L6.4596781,0 C6.7598847,0 7.0032844,0.246712 7.0032844,0.55098661 7.0032844,0.85526148 6.7598847,1.1019597 6.4596781,1.1019597 L4.4664093,1.1019597 C4.1662027,1.1019597 3.9228029,0.85526148 3.9228029,0.55098661 3.9228029,0.246712 4.1662027,0 4.4664093,0 z</StreamGeometry>
+
+    <Style x:Key="IconCloseKey" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource DeleteGeometry}"/>
+        <Setter Property="Fill" Value="{StaticResource IconNormalBackground}"/>
+    </Style>
+    <Style x:Key="IconSaveKey" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource SaveGeometry}"/>
+        <Setter Property="Fill" Value="{StaticResource IconNormalBackground}"/>
+    </Style>
+    <Style x:Key="IconSignatureKey" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource SignatureGeometry}"/>
+        <Setter Property="Fill" Value="{StaticResource IconNormalBackground}"/>
+    </Style>
+    <Style x:Key="IconWastebasketKey" TargetType="Path">
+        <Setter Property="Data" Value="{StaticResource WastebasketGeometry}"/>
+        <Setter Property="Fill" Value="{StaticResource IconNormalBackground}"/>
+    </Style>
+
+    <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFad672e" Offset="0"/>
+                    <GradientStop Color="#FF773b19" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource IconCloseKey}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0"/>
+                        <TextBlock Text="{Binding}" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DeleteButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF9b3c3e" Offset="0"/>
+                    <GradientStop Color="#FF601416" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource IconWastebasketKey}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0"/>
+                        <TextBlock Text="{Binding}" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SaveButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF748a1e" Offset="0"/>
+                    <GradientStop Color="#FF495500" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource IconSaveKey}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0"/>
+                        <TextBlock Text="{Binding}" Foreground="White" VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SignButtonStyle" TargetType="{x:Type Button}">
+        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="Height" Value="24" />
+        <Setter Property="MinWidth" Value="80" />
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFAA1700" Offset="0"/>
+                    <GradientStop Color="#FF731000" Offset="1"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Path Style="{StaticResource IconSignatureKey}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,1,0,0"/>
+                        <TextBlock Text="{Binding}" Foreground="White" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

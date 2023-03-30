@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SignPadPicker.Adaptor"
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="500">
+             d:DesignHeight="380" d:DesignWidth="500"
+             Background="#FFD2D2D2">
     <UserControl.DataContext>
         <local:ScreenSignPadViewModel />
     </UserControl.DataContext>
@@ -21,13 +22,8 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <ContentControl Content="{Binding SignPad}" HorizontalAlignment="Stretch" Height="300" VerticalAlignment="Stretch">
-
-        </ContentControl>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1">
-            <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Save}" ButtonStyle="Save" Width="100" Height="30" Margin="5" Command="{Binding SaveCommand}" />-->
-            <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Clear}" ButtonStyle="Delete" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" />-->
-            <!--<ButtonEx Content="{LanguageResource Source=CurrentResource, Path=DIC_Close}" ButtonStyle="Close" Width="100" Height="30" Margin="5" Command="{Binding CloseCommand}" />-->
+        <ContentControl Content="{Binding SignPad}" HorizontalAlignment="Stretch" Height="300" VerticalAlignment="Stretch" Margin="10,10,10,0"></ContentControl>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="5,0">
             <Button Content="{Binding ConfirmBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ConfirmCommand}" Style="{StaticResource SaveButtonStyle}" />
             <Button Content="{Binding ClearBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" Style="{StaticResource DeleteButtonStyle}" />
             <Button Content="{Binding CancelBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding CancelCommand}" Style="{StaticResource CloseButtonStyle}" />
