@@ -6,8 +6,11 @@
              xmlns:local="clr-namespace:SignPadPicker.Adaptor"
              mc:Ignorable="d" 
              d:DesignHeight="380" d:DesignWidth="500"
+             Background="#FFD2D2D2"
              Loaded="UserControl_Loaded"
-             Background="#FFD2D2D2">
+             MouseDown="UserControl_MouseDown"
+             MouseMove="UserControl_MouseMove"
+             MouseUp="UserControl_MouseUp">
     <UserControl.DataContext>
         <local:NiceSignPadViewModel />
     </UserControl.DataContext>

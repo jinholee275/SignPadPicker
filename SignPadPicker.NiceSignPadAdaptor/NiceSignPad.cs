@@ -1,5 +1,4 @@
 ﻿using SignPadPicker.Exceptions;
-using System;
 using System.Windows;
 using Screen = System.Windows.Forms.Screen;
 
@@ -59,7 +58,6 @@ namespace SignPadPicker.Adaptor
             Window win = new Window
             {
                 Owner = Application.Current.MainWindow,
-                //Title = "",
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,

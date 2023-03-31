@@ -42,7 +42,6 @@ namespace SignPadPicker.Adaptor
             Window win = new Window
             {
                 Owner = Application.Current.MainWindow,
-                //Title = "",
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,
