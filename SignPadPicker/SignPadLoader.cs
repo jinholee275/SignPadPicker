@@ -25,22 +25,20 @@ namespace SignPadPicker
         {
             Plugins = new List<ISignPadPlugin>();
             LoadPluginAssemblyFile(path);
-            LoadPluginInstance();
         }
 
-        private void LoadPluginAssemblyFile(string path) =>
-            Directory.GetFiles(path).ToList()
-                .Where(file =>
-                    Path.GetFileName(file).StartsWith("SignPadPicker.") &&
-                    Path.GetFileName(file).EndsWith("Adaptor.dll"))
-                .ToList()
-                .ForEach(file => Assembly.LoadFile(Path.GetFullPath(file)));
-
-        private void LoadPluginInstance() =>
-            AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())
-                .Where(p => typeof(ISignPadPlugin).IsAssignableFrom(p) && p.IsClass)
-                .ToList()
-                .ForEach(type => Plugins.Add((ISignPadPlugin)Activator.CreateInstance(type)));
+        private void LoadPluginAssemblyFile(string path)
+            => Directory
+            .GetFiles(path)
+            .ToList()
+            .Where(file =>
+                Path.GetFileName(file).StartsWith("SignPadPicker.") &&
+                Path.GetFileName(file).EndsWith("Adaptor.dll"))
+            .ToList()
+            .Select(file => Assembly.LoadFile(Path.GetFullPath(file)))
+            .SelectMany(a => a.GetTypes())
+            .Where(p => typeof(ISignPadPlugin).IsAssignableFrom(p) && p.IsClass)
+            .ToList()
+            .ForEach(type => Plugins.Add((ISignPadPlugin) Activator.CreateInstance(type)));
     }
 }
