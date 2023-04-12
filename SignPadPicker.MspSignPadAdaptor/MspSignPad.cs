@@ -10,6 +10,8 @@ namespace SignPadPicker.MspSignPadAdaptor
 
         public string Description => "MspSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get

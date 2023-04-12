@@ -12,11 +12,13 @@
                 <Button Content="Activate any signpad" Click="ActivateBtn_Click" Tag="" />
                 <Button Content="ScreenSignPad" Click="ActivateBtn_Click" Tag="ScreenSignPad" />
                 <Button Content="MspSignPad,MipSignPad" Click="ActivateBtn_Click" Tag="MspSignPad,MipSignPad" />
+                <Button Content="KscatSignPad,NicePosSignPad" Click="ActivateBtn_Click" Tag="KscatSignPad,NicePosSignPad" />
                 <Button Content="MspSignPad" Click="ActivateBtn_Click" Tag="MspSignPad" />
                 <Button Content="MipSignPad" Click="ActivateBtn_Click" Tag="MipSignPad" />
                 <Button Content="KscatSignPad" Click="ActivateBtn_Click" Tag="KscatSignPad" />
                 <Button Content="EasyCardKSignPad" Click="ActivateBtn_Click" Tag="EasyCardKSignPad" />
                 <Button Content="NiceSignPad" Click="ActivateBtn_Click" Tag="NiceSignPad" />
+                <Button Content="NicePosSignPad" Click="ActivateBtn_Click" Tag="NicePosSignPad" />
                 <Button Content="SmartroSignPad" Click="ActivateBtn_Click" Tag="SmartroSignPad" />
                 <Button Content="KocesSignPad" Click="ActivateBtn_Click" Tag="KocesSignPad" />
             </StackPanel>

@@ -10,6 +10,8 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "ScreenSignPad Plugin";
 
+        public bool IsPhysicalDevice => false;
+
         public bool IsAvailable => true;
 
         public string Activate()

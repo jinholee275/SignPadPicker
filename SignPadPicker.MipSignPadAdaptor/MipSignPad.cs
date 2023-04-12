@@ -11,6 +11,8 @@ namespace SignPadPicker.MipSignPadAdaptor
 
         public string Description => "MipSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get

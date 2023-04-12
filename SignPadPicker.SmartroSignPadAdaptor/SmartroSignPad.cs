@@ -13,6 +13,8 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "SmartroSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get

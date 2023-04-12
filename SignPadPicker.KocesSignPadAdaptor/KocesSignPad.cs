@@ -11,6 +11,8 @@ namespace SignPadPicker.KocesSignPadAdaptor
 
         public string Description => "KocesSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get

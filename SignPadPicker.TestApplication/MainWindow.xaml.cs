@@ -59,13 +59,13 @@ namespace SignPadPicker.TestApplication
 
                 if (string.IsNullOrEmpty(pluginName))
                 {
-                    plugin = SignPadLoader.GetPlugin();
+                    plugin = SignPadLoader.GetPlugin(onlyPhysicalDevice: true);
                 }
                 else
                 {
                     plugin = pluginName.Split(',').Length > 1
-                        ? SignPadLoader.GetPlugin(pluginName.Split(','))
-                        : SignPadLoader.GetPlugin(pluginName);
+                        ? SignPadLoader.GetPlugin(names: pluginName.Split(','))
+                        : SignPadLoader.GetPlugin(name: pluginName);
                 }
 
                 string filePath = plugin.Activate();

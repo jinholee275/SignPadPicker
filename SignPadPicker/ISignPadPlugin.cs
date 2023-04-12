@@ -18,6 +18,11 @@
         bool IsAvailable { get; }
 
         /// <summary>
+        /// 물리적인 장치인지 여부
+        /// </summary>
+        bool IsPhysicalDevice { get; }
+
+        /// <summary>
         /// 서명패드를 활성화하여 서명을 받을 준비를 한다.
         /// </summary>
         /// <returns>서명한 이미지 파일의 경로</returns>

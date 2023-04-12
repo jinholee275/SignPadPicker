@@ -14,6 +14,8 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "KscatSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get

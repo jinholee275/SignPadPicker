@@ -10,6 +10,8 @@ namespace SignPadPicker.Adaptor
 
         public string Description => "NiceSignPad Plugin";
 
+        public bool IsPhysicalDevice => true;
+
         public bool IsAvailable
         {
             get
