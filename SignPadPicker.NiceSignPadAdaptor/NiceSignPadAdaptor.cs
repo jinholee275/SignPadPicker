@@ -1,23 +1,22 @@
 ﻿using AxSIGNPOSLib;
+using SignPadPicker.Extensions;
 using System;
+using System.Configuration;
 using System.IO;
 
 namespace SignPadPicker.Adaptor
 {
+    [Obsolete]
     public class NiceSignPadAdaptor
     {
         public AxSignPos AxSignPos { get; } = new AxSignPos();
 
         public string DestFileName { get; set; }
 
-        private readonly short _port;
+        private short ComPort => Convert.ToInt16(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComPort"].IfEmptyReplace(null) ?? "3");
+        private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "115200");
 
-        public NiceSignPadAdaptor(short port = 3)
-        {
-            _port = port;
-        }
-
-        public int OpenPort() => AxSignPos.OpenPort(_port, 115200); // com port 및 속도 세팅.
+        public int OpenPort() => AxSignPos.OpenPort(ComPort, ComSpeed); // com port 및 속도 세팅.
 
         public int ClosePort() => AxSignPos.ClosePort();
 

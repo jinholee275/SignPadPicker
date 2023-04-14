@@ -1,6 +1,8 @@
 ﻿using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -27,14 +29,15 @@ namespace SignPadPicker.Adaptor
             }
         }
 
-        private static readonly string iniFilePath = @"C:\Kicc\EasyCardK\SETUP\OPTION.ini";
-
         #region DllImports
 
         [DllImport(@"kernel32.dll", CharSet = CharSet.Unicode)]
         public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder refVal, int size, string filePath);
 
         #endregion
+        
+        private string IniFile => ConfigurationManager.AppSettings["SignPadPicker.EasyCardKSignPadAdaptor.IniFile"].IfEmptyReplace(null) ?? @"C:\Kicc\EasyCardK\SETUP\OPTION.ini";
+        private string HttpPort => ConfigurationManager.AppSettings["SignPadPicker.EasyCardKSignPadAdaptor.HttpPort"] ?? "8090";
 
         public string Activate()
         {
@@ -170,8 +173,8 @@ namespace SignPadPicker.Adaptor
         {
             Dictionary<string, string> files = new Dictionary<string, string>
             {
-                { "EasyCard", "C:\\Kicc\\EasyCardK\\EasyCard.exe" },
-                { "EzMSR", "C:\\Kicc\\EzMSR2\\EzMSR.exe" }
+                { "EasyCard", @"C:\Kicc\EasyCardK\EasyCard.exe" },
+                { "EzMSR", @"C:\Kicc\EzMSR2\EzMSR.exe" }
             };
 
             var runningProcesses = Process.GetProcesses().Select(p => p.ProcessName);
@@ -197,7 +200,7 @@ namespace SignPadPicker.Adaptor
         /// </summary>
         private string GetPort()
         {
-            if (!File.Exists(iniFilePath))
+            if (!File.Exists(IniFile))
             {
                 throw new SignPadNotInstalledException();
             }
@@ -210,12 +213,12 @@ namespace SignPadPicker.Adaptor
 
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                GetPrivateProfileString("SETUP", "HTTP_PORT", "", retPort, 32, iniFilePath);
+                GetPrivateProfileString("SETUP", "HTTP_PORT", "", retPort, 32, IniFile);
             }
 
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                retPort.Append("8090");
+                retPort.Append(HttpPort);
             }
 
             return retPort.ToString();

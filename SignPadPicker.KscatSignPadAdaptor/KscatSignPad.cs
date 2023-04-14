@@ -1,6 +1,8 @@
 ﻿using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -52,13 +54,13 @@ namespace SignPadPicker.Adaptor
         private readonly string CR = Convert.ToChar(13).ToString();
         private readonly string FS = Convert.ToChar(28).ToString();
 
-        private readonly string m_ImgPath = @"C:\KSCAT";
-        private readonly string m_ImgFile = @"Sign.bmp";
-        private readonly string m_IniFile = @"config.ini";
-        private readonly string m_Message1 = "";
-        private readonly string m_Message2 = "";
-        private readonly string m_Message3 = "";
-        private readonly string m_Message4 = "";
+        private string ImgFile => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.ImgFile"].IfEmptyReplace(null) ?? @"C:\KSCAT\Sign.bmp";
+        private string IniFile => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.IniFile"].IfEmptyReplace(null) ?? @"C:\KSCAT\config.ini";
+        private string m_HttpPort => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.HttpPort"] ?? "27015";
+        private string Message1 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message1"] ?? "";
+        private string Message2 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message2"] ?? "";
+        private string Message3 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message3"] ?? "";
+        private string Message4 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message4"] ?? "";
 
         public string Activate()
         {
@@ -125,10 +127,10 @@ namespace SignPadPicker.Adaptor
             request_msg += STX;                                             // STX
             request_msg += msg_len_str.PadLeft(SEND_FLD_SIZE[1], PAD_INT);  // 전문 길이
             request_msg += "P2".PadRight(SEND_FLD_SIZE[2], PAD_CHAR);       // Command ID
-            request_msg += m_Message1.PadRight(SEND_FLD_SIZE[3], PAD_CHAR); // Message1
-            request_msg += m_Message2.PadRight(SEND_FLD_SIZE[4], PAD_CHAR); // Message2
-            request_msg += m_Message3.PadRight(SEND_FLD_SIZE[5], PAD_CHAR); // Message3
-            request_msg += m_Message4.PadRight(SEND_FLD_SIZE[6], PAD_CHAR); // Message4
+            request_msg += Message1.PadRight(SEND_FLD_SIZE[3], PAD_CHAR); // Message1
+            request_msg += Message2.PadRight(SEND_FLD_SIZE[4], PAD_CHAR); // Message2
+            request_msg += Message3.PadRight(SEND_FLD_SIZE[5], PAD_CHAR); // Message3
+            request_msg += Message4.PadRight(SEND_FLD_SIZE[6], PAD_CHAR); // Message4
             request_msg += "O".PadRight(SEND_FLD_SIZE[7], PAD_CHAR);        // 서명 저장 유무
             request_msg += ETX;                                             // ETX
             request_msg += CR;                                              // CR
@@ -146,7 +148,7 @@ namespace SignPadPicker.Adaptor
 
             if (errCode.Equals("0000"))
             {
-                return Path.Combine(m_ImgPath, m_ImgFile);
+                return ImgFile;
             }
             else if (errCode.Equals("1000"))
             {
@@ -172,12 +174,12 @@ namespace SignPadPicker.Adaptor
             // 서명패드 PORT가 설정된 ini파일 읽어오기
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                GetPrivateProfileString("daemon", "port", "27015", retPort, 32, Path.Combine(m_ImgPath, m_IniFile));
+                GetPrivateProfileString("daemon", "port", m_HttpPort, retPort, 32, IniFile);
             }
 
             if (string.IsNullOrEmpty(retPort.ToString()))
             {
-                retPort.Append("27015");
+                retPort.Append(m_HttpPort);
             }
 
             return retPort.ToString();

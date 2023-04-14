@@ -1,5 +1,7 @@
 ﻿using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
 
@@ -29,10 +31,17 @@ namespace SignPadPicker.KocesSignPadAdaptor
 
         #endregion
 
+        private int ComPort => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.ComPort"].IfEmptyReplace(null) ?? "4");
+        private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "38400");
+        private string Message1 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message1"] ?? "";
+        private string Message2 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message2"] ?? "";
+        private string Message3 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message3"] ?? "";
+        private string Message4 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message4"] ?? "";
+
         public string Activate()
         {
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
-            int nRtn = UserSignRequest(4, 38400, "", "서명을", "입력하세요", "", filePath);
+            int nRtn = UserSignRequest(ComPort, ComSpeed, Message1, Message2, Message3, Message4, filePath);
 
             switch (nRtn)
             {

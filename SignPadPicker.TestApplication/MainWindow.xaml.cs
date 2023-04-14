@@ -1,6 +1,6 @@
 ﻿using SignPadPicker.Exceptions;
 using System;
-using System.Collections;
+using System.Configuration;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,6 +67,11 @@ namespace SignPadPicker.TestApplication
                         ? SignPadLoader.GetPlugin(names: pluginName.Split(','))
                         : SignPadLoader.GetPlugin(name: pluginName);
                 }
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+                
+                SignImage.Source = null;
 
                 string filePath = plugin.Activate();
 

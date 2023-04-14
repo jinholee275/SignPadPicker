@@ -1,5 +1,7 @@
 ﻿using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -30,9 +32,6 @@ namespace SignPadPicker.NicePosSignPadAdaptor
 
         #endregion
 
-        private readonly int port = 5;
-        private readonly int baud = 115200;
-
         public bool IsAvailable
         {
             get
@@ -46,11 +45,15 @@ namespace SignPadPicker.NicePosSignPadAdaptor
             }
         }
 
+        private int ComPort => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NicePosSignPadAdaptor.ComPort"].IfEmptyReplace(null) ?? "5");
+        private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NicePosSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "115200");
+        private string Message => ConfigurationManager.AppSettings["SignPadPicker.NicePosSignPadAdaptor.Message"] ?? "";
+
         private void Init()
         {
-            if (OpenPort(port, baud) == 1)
+            if (OpenPort(ComPort, ComSpeed) == 1)
             {
-                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes("fffffssdfsd");
+                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes("");
                 byte[] recvBuf = new byte[5120];
                 byte[] hexBuf = new byte[5120];
                 byte[] err = new byte[512];
@@ -75,9 +78,9 @@ namespace SignPadPicker.NicePosSignPadAdaptor
 
         public string Activate()
         {
-            if (OpenPort(port, baud) == 1)
+            if (OpenPort(ComPort, ComSpeed) == 1)
             {
-                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes("                                서명해주세요");
+                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes($"                             {Message}");
                 byte[] recvBuf = new byte[5120];
                 byte[] hexBuf = new byte[5120];
                 byte[] err = new byte[512];

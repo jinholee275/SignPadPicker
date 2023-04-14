@@ -1,8 +1,9 @@
 ﻿using AxSIGNPOSLib;
 using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
 using System;
+using System.Configuration;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms.Integration;
 using System.Windows.Input;
@@ -18,7 +19,8 @@ namespace SignPadPicker.Adaptor
 
         public SignResult Result { get; set; }
 
-        private const short PORT_NUMBER = 3;
+        private short ComPort => Convert.ToInt16(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComPort"].IfEmptyReplace(null) ?? "3");
+        private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "115200");
 
         private string destFileName;
 
@@ -51,7 +53,7 @@ namespace SignPadPicker.Adaptor
         }
 
         #endregion
-
+        
         public NiceSignPadViewModel()
         {
             try
@@ -96,7 +98,7 @@ namespace SignPadPicker.Adaptor
                 return false;
             }
 
-            int result = axSignPos.OpenPort(PORT_NUMBER, 115200);
+            int result = axSignPos.OpenPort(ComPort, ComSpeed);
 
             if (result == 0)
             {
