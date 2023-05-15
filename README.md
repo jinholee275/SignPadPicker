@@ -22,6 +22,17 @@
 └─ SignPadPicker.ScreenSignPadAdaptor.dll
 ```
 
+### SignPadPicker.KisSignPadAdaptor plug-in library
+
+- Vendor: KIS정보통신
+- Client
+  - 단국대병원
+
+```
+│  KisDongleDll.dll
+└─ SignPadPicker.KisSignPadAdaptor.dll
+```
+
 ### SignPadPicker.KscatSignPadAdaptor plug-in library
 
 - Vendor: KSNET
@@ -39,6 +50,7 @@
 - Vendor: NICE정보통신(서울전자통신)
 - Client
   - 성남시의료원
+  - 강원대병원
 
 ```
 │  NICEPOSICV105.dll

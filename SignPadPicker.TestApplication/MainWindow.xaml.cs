@@ -55,6 +55,10 @@ namespace SignPadPicker.TestApplication
         {
             try
             {
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
+
+                SignImage.Source = null;
                 ISignPadPlugin plugin;
 
                 if (string.IsNullOrEmpty(pluginName))
@@ -67,11 +71,6 @@ namespace SignPadPicker.TestApplication
                         ? SignPadLoader.GetPlugin(names: pluginName.Split(','))
                         : SignPadLoader.GetPlugin(name: pluginName);
                 }
-
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-                ConfigurationManager.RefreshSection(config.AppSettings.SectionInformation.Name);
-                
-                SignImage.Source = null;
 
                 string filePath = plugin.Activate();
 

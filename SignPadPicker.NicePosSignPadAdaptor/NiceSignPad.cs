@@ -6,7 +6,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SignPadPicker.NicePosSignPadAdaptor
+namespace SignPadPicker.Adaptor
 {
     public class NiceSignPad : ISignPadPlugin
     {
