@@ -40,8 +40,23 @@ namespace SignPadPicker.KocesSignPadAdaptor
 
         public string Activate()
         {
+            SignPadConfig config = new SignPadConfig
+            {
+                ComPort = ComPort,
+                ComSpeed = ComSpeed,
+                Message1 = Message1,
+                Message2 = Message2,
+                Message3 = Message3,
+                Message4 = Message4,
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
-            int nRtn = UserSignRequest(ComPort, ComSpeed, Message1, Message2, Message3, Message4, filePath);
+            int nRtn = UserSignRequest(config.ComPort, config.ComSpeed, config.Message1, config.Message2, config.Message3, config.Message4, filePath);
 
             switch (nRtn)
             {

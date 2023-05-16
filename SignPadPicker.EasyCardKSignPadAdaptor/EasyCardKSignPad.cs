@@ -41,14 +41,26 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
+            SignPadConfig config = new SignPadConfig
+            {
+                HttpPort = int.Parse(GetPort()),
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
             if (!RunSignPadAppIfNotRunning())
             {
                 throw new SignPadNotInstalledException();
             }
 
-            string signData = OnSignPad();
+            string httpPort = config.HttpPort.ToString();
 
-            return SaveSignDataDB(signData);
+            string signData = OnSignPad(port: httpPort);
+
+            return SaveSignDataDB(port: httpPort, textData: signData);
         }
 
         /// <summary>
@@ -58,10 +70,8 @@ namespace SignPadPicker.Adaptor
         /// author       : 이상현
         /// create date  : 2018-02-20 
         /// </summary>
-        private string OnSignPad()
+        private string OnSignPad(string port)
         {
-            string port = GetPort();
-
             if (string.IsNullOrEmpty(port))
             {
                 throw new SignPadNotAvailableException("포트번호를 확인해주세요");
@@ -114,9 +124,9 @@ namespace SignPadPicker.Adaptor
         /// create date  : 2018-02-20 
         /// </summary>
         /// <returns>저장한 서명파일경로</returns>
-        public string SaveSignDataDB(string sTextData)
+        public string SaveSignDataDB(string port, string textData)
         {
-            if (string.IsNullOrEmpty(sTextData))
+            if (string.IsNullOrEmpty(textData))
             {
                 throw new EmptySignException();
             }
@@ -124,7 +134,7 @@ namespace SignPadPicker.Adaptor
             // 임시 파일명 생성
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".bmp");
             string cb = "callback=jsonp12345678983543342";
-            string url = $"http://127.0.0.1:{GetPort()}/?{cb}&REQ=BM^{filePath}^0^{sTextData}";
+            string url = $"http://127.0.0.1:{port}/?{cb}&REQ=BM^{filePath}^0^{textData}";
 
             WinHttpRequest winHttp = new WinHttpRequest();
 
@@ -138,7 +148,7 @@ namespace SignPadPicker.Adaptor
 
                 if (resp == null)
                 {
-                    RequestCancel();
+                    RequestCancel(port: port);
                     throw new SignPadNotAvailableException();
                 }
 
@@ -146,17 +156,17 @@ namespace SignPadPicker.Adaptor
             }
             catch (Exception)
             {
-                RequestCancel();
+                RequestCancel(port: port);
                 throw new SignFailException("서명 이미지 변환에 실패했습니다.");
             }
         }
 
-        private void RequestCancel()
+        private void RequestCancel(string port)
         {
             WinHttpRequest winHttp = new WinHttpRequest();
 
             string cb = "callback=jsonp12345678983543342";
-            string url = $"http://127.0.0.1:{GetPort()}/?{cb}&REQ=CC^"; //실행 취소
+            string url = $"http://127.0.0.1:{port}/?{cb}&REQ=CC^"; //실행 취소
 
             winHttp.Open("POST", url, true); //뒤에 bool값이 동기/비동기방식을 나타냄(Async)
             winHttp.Send("");

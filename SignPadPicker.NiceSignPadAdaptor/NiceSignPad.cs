@@ -1,4 +1,7 @@
 ﻿using SignPadPicker.Exceptions;
+using SignPadPicker.Extensions;
+using System;
+using System.Configuration;
 using System.Windows;
 using Screen = System.Windows.Forms.Screen;
 
@@ -30,7 +33,22 @@ namespace SignPadPicker.Adaptor
             }
         }
 
+        private int ComPort => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComPort"].IfEmptyReplace(null) ?? "3");
+        private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "115200");
+
+
         public string Activate()
+        {
+            SignPadConfig config = new SignPadConfig
+            {
+                ComPort = ComPort,
+                ComSpeed = ComSpeed,
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
         {
             Window win = CreateWindow();
 
