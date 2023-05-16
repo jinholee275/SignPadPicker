@@ -73,10 +73,10 @@ namespace SignPadPicker.Adaptor
             StringBuilder sb = new StringBuilder();
             sb.Append("0".PadLeft(8, ' ')); //금액 8자리
             sb.Append(filePath.PadRight(100, ' '));
-            sb.Append(config.Message1.PadRight(16, ' '));
-            sb.Append(config.Message2.PadRight(16, ' '));
-            sb.Append(config.Message3.PadRight(16, ' '));
-            sb.Append(config.Message4.PadRight(16, ' '));
+            sb.Append((config.Message1 ?? string.Empty).PadRight(16, ' '));
+            sb.Append((config.Message2 ?? string.Empty).PadRight(16, ' '));
+            sb.Append((config.Message3 ?? string.Empty).PadRight(16, ' '));
+            sb.Append((config.Message4 ?? string.Empty).PadRight(16, ' '));
 
             ASYNC_Approval(config.ComPort, config.ComSpeed, "EA", sb.ToString(), sb.Length);
 

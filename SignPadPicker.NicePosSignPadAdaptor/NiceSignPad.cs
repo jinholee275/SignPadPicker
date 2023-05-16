@@ -92,7 +92,7 @@ namespace SignPadPicker.Adaptor
         {
             if (OpenPort(config.ComPort, config.ComSpeed) == 1)
             {
-                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes($"                             {config.Message1}");
+                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes($"                             {config.Message1 ?? string.Empty}");
                 byte[] recvBuf = new byte[5120];
                 byte[] hexBuf = new byte[5120];
                 byte[] err = new byte[512];
