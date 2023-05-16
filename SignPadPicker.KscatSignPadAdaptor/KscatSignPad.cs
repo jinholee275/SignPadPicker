@@ -80,9 +80,7 @@ namespace SignPadPicker.Adaptor
         {
             Init(port: config.HttpPort);
 
-            return Sign(
-                port: config.HttpPort,
-                outFilePath: config.ImgFilePath);
+            return Sign(config);
         }
 
         /// <summary>
@@ -127,7 +125,7 @@ namespace SignPadPicker.Adaptor
         /// 전자서명 요청
         /// </summary>
         /// <returns></returns>
-        private string Sign(int port, string outFilePath)
+        private string Sign(SignPadConfig config)
         {
             string ip = "127.0.0.1";
             string request_msg = string.Empty;
@@ -141,16 +139,16 @@ namespace SignPadPicker.Adaptor
             request_msg += STX;                                             // STX
             request_msg += msg_len_str.PadLeft(SEND_FLD_SIZE[1], PAD_INT);  // 전문 길이
             request_msg += "P2".PadRight(SEND_FLD_SIZE[2], PAD_CHAR);       // Command ID
-            request_msg += Message1.PadRight(SEND_FLD_SIZE[3], PAD_CHAR); // Message1
-            request_msg += Message2.PadRight(SEND_FLD_SIZE[4], PAD_CHAR); // Message2
-            request_msg += Message3.PadRight(SEND_FLD_SIZE[5], PAD_CHAR); // Message3
-            request_msg += Message4.PadRight(SEND_FLD_SIZE[6], PAD_CHAR); // Message4
+            request_msg += (config.Message1 ?? string.Empty).PadRight(SEND_FLD_SIZE[3], PAD_CHAR); // Message1
+            request_msg += (config.Message2 ?? string.Empty).PadRight(SEND_FLD_SIZE[4], PAD_CHAR); // Message2
+            request_msg += (config.Message3 ?? string.Empty).PadRight(SEND_FLD_SIZE[5], PAD_CHAR); // Message3
+            request_msg += (config.Message4 ?? string.Empty).PadRight(SEND_FLD_SIZE[6], PAD_CHAR); // Message4
             request_msg += "O".PadRight(SEND_FLD_SIZE[7], PAD_CHAR);        // 서명 저장 유무
             request_msg += ETX;                                             // ETX
             request_msg += CR;                                              // CR
 
             // KSCATApproval 호출
-            int result = KSCATApproval(recv_msg, ip, port, request_msg, request_msg.Length, 0);
+            int result = KSCATApproval(recv_msg, ip, config.HttpPort, request_msg, request_msg.Length, 0);
 
             if (result <= 0)
             {
@@ -162,7 +160,7 @@ namespace SignPadPicker.Adaptor
 
             if (errCode.Equals("0000"))
             {
-                return outFilePath;
+                return config.ImgFilePath ?? ImgFile;
             }
             else if (errCode.Equals("1000"))
             {
