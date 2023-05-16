@@ -61,6 +61,11 @@ namespace SignPadPicker.MipSignPadAdaptor
 
         public string Activate()
         {
+            return Activate(null);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
             if (!IsAvailable)
             {
                 throw new SignPadNotAvailableException();

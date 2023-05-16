@@ -21,7 +21,7 @@ namespace SignPadPicker.Adaptor
             {
                 try
                 {
-                    Init();
+                    Init(ComPortInt, ComSpeedInt);
                     SMT_Dongle_Stop();
                     return true;
                 }
@@ -100,7 +100,18 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
-            Init();
+            SignPadConfig config = new SignPadConfig
+            {
+                ComPort = ComPortInt,
+                ComSpeed = ComSpeedInt,
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
+            Init(config.ComPort, config.ComSpeed);
 
             string signImgPath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
 
@@ -151,9 +162,9 @@ namespace SignPadPicker.Adaptor
             return signImgPath;
         }
 
-        private void Init()
+        private void Init(int port, int speed)
         {
-            if (SMT_Dongle_Start(ComPortInt, ComSpeedInt) < 0)
+            if (SMT_Dongle_Start(port, speed) < 0)
             {
                 throw new SignPadNotAvailableException();
             }

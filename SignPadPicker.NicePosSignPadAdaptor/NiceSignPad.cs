@@ -78,9 +78,21 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
-            if (OpenPort(ComPort, ComSpeed) == 1)
+            SignPadConfig config = new SignPadConfig
             {
-                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes($"                             {Message}");
+                ComPort = ComPort,
+                ComSpeed = ComSpeed,
+                Message1 = Message,
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
+            if (OpenPort(config.ComPort, config.ComSpeed) == 1)
+            {
+                byte[] sendBuf = Encoding.GetEncoding(51949).GetBytes($"                             {config.Message1}");
                 byte[] recvBuf = new byte[5120];
                 byte[] hexBuf = new byte[5120];
                 byte[] err = new byte[512];
@@ -88,7 +100,7 @@ namespace SignPadPicker.Adaptor
                 int activateResult = NicePosSign(0x42, sendBuf, recvBuf, hexBuf, err);
 
                 _ = ClosePort();
-                
+
                 int len = Array.IndexOf(recvBuf, (byte)0);
                 if (len == -1) len = recvBuf.Length;
 
@@ -108,7 +120,7 @@ namespace SignPadPicker.Adaptor
                 {
                     throw new SignFailException();
                 }
-                        
+
                 return filePath;
             }
             else

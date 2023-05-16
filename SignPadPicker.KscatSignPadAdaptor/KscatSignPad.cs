@@ -24,7 +24,10 @@ namespace SignPadPicker.Adaptor
             {
                 try
                 {
-                    Init();
+                    int httpPort = int.Parse(GetPort());
+
+                    Init(port: httpPort);
+
                     return true;
                 }
                 catch
@@ -64,19 +67,31 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
-            Init();
+            SignPadConfig config = new SignPadConfig
+            {
+                HttpPort = int.Parse(GetPort()),
+                ImgFilePath = ImgFile
+            };
 
-            return Sign();
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
+            Init(port: config.HttpPort);
+
+            return Sign(
+                port: config.HttpPort,
+                outFilePath: config.ImgFilePath);
         }
 
         /// <summary>
         /// 서명패드 초기화
         /// </summary>
         /// <exception cref="Exception"></exception>
-        private void Init()
+        private void Init(int port)
         {
             string ip = "127.0.0.1";
-            int port = int.Parse(GetPort());
             string request_msg = string.Empty;
             byte[] recv_msg = new byte[4096];
             int[] SEND_FLD_SIZE = { 1, 4, 2, 1, 1 };
@@ -112,10 +127,9 @@ namespace SignPadPicker.Adaptor
         /// 전자서명 요청
         /// </summary>
         /// <returns></returns>
-        private string Sign()
+        private string Sign(int port, string outFilePath)
         {
             string ip = "127.0.0.1";
-            int port = int.Parse(GetPort());
             string request_msg = string.Empty;
             byte[] recv_msg = new byte[4096];
             int[] SEND_FLD_SIZE = { 1, 4, 2, 16, 16, 16, 16, 1, 1, 1 };
@@ -148,7 +162,7 @@ namespace SignPadPicker.Adaptor
 
             if (errCode.Equals("0000"))
             {
-                return ImgFile;
+                return outFilePath;
             }
             else if (errCode.Equals("1000"))
             {

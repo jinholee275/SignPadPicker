@@ -52,18 +52,33 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
+            SignPadConfig config = new SignPadConfig
+            {
+                ComPort = ComPort,
+                ComSpeed = ComSpeed,
+                Message1 = Message1,
+                Message2 = Message2,
+                Message3 = Message3,
+                Message4 = Message4,
+            };
+
+            return Activate(config);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
             //! 전문에 입력할 길이제한으로 `Path.GetTempPath()` 사용불가
             string filePath = TEMP_SIGN_FILE_PATH;
 
             StringBuilder sb = new StringBuilder();
             sb.Append("0".PadLeft(8, ' ')); //금액 8자리
             sb.Append(filePath.PadRight(100, ' '));
-            sb.Append(Message1.PadRight(16, ' '));
-            sb.Append(Message2.PadRight(16, ' '));
-            sb.Append(Message3.PadRight(16, ' '));
-            sb.Append(Message4.PadRight(16, ' '));
+            sb.Append(config.Message1.PadRight(16, ' '));
+            sb.Append(config.Message2.PadRight(16, ' '));
+            sb.Append(config.Message3.PadRight(16, ' '));
+            sb.Append(config.Message4.PadRight(16, ' '));
 
-            ASYNC_Approval(ComPort, ComSpeed, "EA", sb.ToString(), sb.Length);
+            ASYNC_Approval(config.ComPort, config.ComSpeed, "EA", sb.ToString(), sb.Length);
 
             return filePath;
         }

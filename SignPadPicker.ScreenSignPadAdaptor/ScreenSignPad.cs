@@ -16,6 +16,11 @@ namespace SignPadPicker.Adaptor
 
         public string Activate()
         {
+            return Activate(null);
+        }
+
+        public string Activate(SignPadConfig config)
+        {
             Window win = CreateWindow();
 
             _ = win.ShowDialog();
