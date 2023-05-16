@@ -56,7 +56,14 @@ namespace SignPadPicker.KocesSignPadAdaptor
         public string Activate(SignPadConfig config)
         {
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
-            int nRtn = UserSignRequest(config.ComPort, config.ComSpeed, config.Message1, config.Message2, config.Message3, config.Message4, filePath);
+            int nRtn = UserSignRequest(
+                config.ComPort,
+                config.ComSpeed,
+                config.Message1 ?? string.Empty,
+                config.Message2 ?? string.Empty,
+                config.Message3 ?? string.Empty,
+                config.Message4 ?? string.Empty,
+                filePath);
 
             switch (nRtn)
             {
