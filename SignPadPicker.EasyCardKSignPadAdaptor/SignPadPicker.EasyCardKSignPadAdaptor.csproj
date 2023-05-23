@@ -75,7 +75,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Interop.WinHttp.dll" />
+    <None Include="Interop.WinHttp.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

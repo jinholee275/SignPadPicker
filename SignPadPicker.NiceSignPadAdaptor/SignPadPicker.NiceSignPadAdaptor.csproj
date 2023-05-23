@@ -83,7 +83,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AxInterop.SIGNPOSLib.dll" />
+    <None Include="AxInterop.SIGNPOSLib.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Interop.SIGNPOSLib.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
