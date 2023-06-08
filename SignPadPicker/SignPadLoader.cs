@@ -9,7 +9,7 @@ namespace SignPadPicker
 {
     public class SignPadLoader
     {
-        public static List<ISignPadPlugin> Plugins { get; set; }
+        public static List<ISignPadPlugin> Plugins { get; set; } = new List<ISignPadPlugin>();
 
         public static ISignPadPlugin GetPlugin(string name)
             => Plugins.FirstOrDefault(p => p.Name == name)
@@ -38,7 +38,6 @@ namespace SignPadPicker
 
         public void LoadPlugins(string path)
         {
-            Plugins = new List<ISignPadPlugin>();
             LoadPluginAssemblyFile(path);
         }
 
@@ -54,6 +53,7 @@ namespace SignPadPicker
                 Assembly.LoadFile(Path.GetFullPath(file)))
             .SelectMany(a => a.GetTypes())
             .Where(p => typeof(ISignPadPlugin).IsAssignableFrom(p) && p.IsClass)
+            .Where(type => !Plugins.Select(p => p.GetType()).Contains(type))
             .ToList()
             .ForEach(type => Plugins.Add((ISignPadPlugin) Activator.CreateInstance(type)));
     }
