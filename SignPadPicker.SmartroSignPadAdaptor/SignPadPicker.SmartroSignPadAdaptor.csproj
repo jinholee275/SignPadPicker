@@ -49,6 +49,12 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>ezSmart.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AxSMTSIGNENCDECOCXLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca79f8d8b6586bcb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -81,6 +87,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="ezSmart.snk" />
     <None Include="SmartroSign.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
