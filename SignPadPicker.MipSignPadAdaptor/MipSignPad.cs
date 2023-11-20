@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 
 namespace SignPadPicker.MipSignPadAdaptor
 {
@@ -59,12 +60,9 @@ namespace SignPadPicker.MipSignPadAdaptor
         private string model = "Model : ";
         private string version = "Version : ";
 
-        public string Activate()
-        {
-            return Activate(null);
-        }
+        public string Activate(Window owner = null) => Activate(config: null, owner);
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             if (!IsAvailable)
             {

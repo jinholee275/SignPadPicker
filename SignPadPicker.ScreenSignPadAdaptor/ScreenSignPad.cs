@@ -14,14 +14,14 @@ namespace SignPadPicker.Adaptor
 
         public bool IsAvailable => true;
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
-            return Activate(null);
+            return Activate(config: null, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
-            Window win = CreateWindow();
+            Window win = CreateWindow(owner);
 
             _ = win.ShowDialog();
 
@@ -42,13 +42,13 @@ namespace SignPadPicker.Adaptor
             throw new SignCancelException();
         }
 
-        private Window CreateWindow()
+        private Window CreateWindow(Window owner = null)
         {
             Size winSize = new Size(500, 380);
 
             Window win = new Window
             {
-                Owner = Application.Current.MainWindow,
+                Owner = owner ?? Application.Current.MainWindow,
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,

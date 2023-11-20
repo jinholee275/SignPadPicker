@@ -37,7 +37,7 @@ namespace SignPadPicker.Adaptor
         private int ComSpeed => Convert.ToInt32(ConfigurationManager.AppSettings["SignPadPicker.NiceSignPadAdaptor.ComSpeed"].IfEmptyReplace(null) ?? "115200");
 
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -45,12 +45,12 @@ namespace SignPadPicker.Adaptor
                 ComSpeed = ComSpeed,
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
-            Window win = CreateWindow();
+            Window win = CreateWindow(owner);
 
             _ = win.ShowDialog();
 
@@ -71,22 +71,20 @@ namespace SignPadPicker.Adaptor
             throw new SignCancelException();
         }
 
-        private Window CreateWindow()
+        private Window CreateWindow(Window owner = null)
         {
             Size winSize = new Size(500, 380);
 
             Window win = new Window
             {
-                Owner = Application.Current.MainWindow,
+                Owner = owner ?? Application.Current.MainWindow,
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,
                 Left = Screen.PrimaryScreen.WorkingArea.Left
-                    + Screen.PrimaryScreen.WorkingArea.Width / 2
-                    - winSize.Width / 2,
+                    + Screen.PrimaryScreen.WorkingArea.Width / 2 - winSize.Width / 2,
                 Top = Screen.PrimaryScreen.WorkingArea.Top
-                    + Screen.PrimaryScreen.WorkingArea.Height / 2
-                    - winSize.Height / 2,
+                    + Screen.PrimaryScreen.WorkingArea.Height / 2 - winSize.Height / 2,
                 Width = winSize.Width,
                 Height = winSize.Height,
                 WindowStyle = WindowStyle.None,

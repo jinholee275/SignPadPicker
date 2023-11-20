@@ -3,10 +3,10 @@ using SignPadPicker.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 
 namespace SignPadPicker.Adaptor
 {
@@ -65,7 +65,7 @@ namespace SignPadPicker.Adaptor
         private string Message3 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message3"] ?? "";
         private string Message4 => ConfigurationManager.AppSettings["SignPadPicker.KscatSignPadAdaptor.Message4"] ?? "";
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -73,10 +73,10 @@ namespace SignPadPicker.Adaptor
                 ImgFilePath = ImgFile
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             Init(port: config.HttpPort);
 

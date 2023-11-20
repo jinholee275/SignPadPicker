@@ -1,4 +1,6 @@
-﻿namespace SignPadPicker
+﻿using System.Windows;
+
+namespace SignPadPicker
 {
     public interface ISignPadPlugin
     {
@@ -26,13 +28,13 @@
         /// 서명패드를 활성화하여 서명을 받을 준비를 한다.
         /// </summary>
         /// <returns>서명한 이미지 파일의 경로</returns>
-        string Activate();
+        string Activate(Window owner = null);
 
         /// <summary>
         /// 서명패드를 활성화하여 서명을 받을 준비를 한다.
         /// </summary>
         /// <param name="config">서명패드를 활성화 하기 위한 환경 설정</param>
         /// <returns></returns>
-        string Activate(SignPadConfig config);
+        string Activate(SignPadConfig config, Window owner = null);
     }
 }

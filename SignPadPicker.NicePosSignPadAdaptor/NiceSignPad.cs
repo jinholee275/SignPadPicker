@@ -5,6 +5,7 @@ using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 
 namespace SignPadPicker.Adaptor
 {
@@ -23,7 +24,7 @@ namespace SignPadPicker.Adaptor
 
         [DllImport("NicePosICV105.dll", CharSet = CharSet.Unicode)]
         public static extern int ClosePort(); //포트Close
-        
+
         [DllImport("NicePosICV105.dll", CharSet = CharSet.Unicode)]
         public static extern int NicePosSign(int fcode, byte[] SeBuf, byte[] ReBuf, byte[] HexString, byte[] errcode); //리더기리셋
 
@@ -76,7 +77,7 @@ namespace SignPadPicker.Adaptor
             }
         }
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -85,10 +86,10 @@ namespace SignPadPicker.Adaptor
                 Message1 = Message,
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             if (OpenPort(config.ComPort, config.ComSpeed) == 1)
             {

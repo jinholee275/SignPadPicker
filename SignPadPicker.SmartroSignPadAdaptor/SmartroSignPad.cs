@@ -5,6 +5,7 @@ using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 
 namespace SignPadPicker.Adaptor
 {
@@ -183,7 +184,7 @@ namespace SignPadPicker.Adaptor
             }
         }
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -191,10 +192,10 @@ namespace SignPadPicker.Adaptor
                 ComSpeed = ComSpeed,
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             Init(config.ComPort, config.ComSpeed);
 
