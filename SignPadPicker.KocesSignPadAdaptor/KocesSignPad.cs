@@ -4,6 +4,7 @@ using System;
 using System.Configuration;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows;
 
 namespace SignPadPicker.KocesSignPadAdaptor
 {
@@ -38,7 +39,7 @@ namespace SignPadPicker.KocesSignPadAdaptor
         private string Message3 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message3"] ?? "";
         private string Message4 => ConfigurationManager.AppSettings["SignPadPicker.KocesSignPadAdaptor.Message4"] ?? "";
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -50,10 +51,10 @@ namespace SignPadPicker.KocesSignPadAdaptor
                 Message4 = Message4,
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
             int nRtn = UserSignRequest(

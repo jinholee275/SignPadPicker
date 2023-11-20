@@ -56,3 +56,10 @@
 │  NICEPOSICV105.dll
 └─ SignPadPicker.NicePosSignPadAdaptor.dll
 ```
+
+### SignPadPicker.SmartroSignPadAdaptor plug-in library
+
+- Vendor: 한우리IT
+- Client
+  - 충북대병원
+  - 강원대병원

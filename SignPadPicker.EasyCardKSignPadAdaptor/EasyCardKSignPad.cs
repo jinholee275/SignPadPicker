@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows;
 using WinHttp;
 
 namespace SignPadPicker.Adaptor
@@ -35,21 +36,21 @@ namespace SignPadPicker.Adaptor
         public static extern int GetPrivateProfileString(string section, string key, string def, StringBuilder refVal, int size, string filePath);
 
         #endregion
-        
+
         private string IniFile => ConfigurationManager.AppSettings["SignPadPicker.EasyCardKSignPadAdaptor.IniFile"].IfEmptyReplace(null) ?? @"C:\Kicc\EasyCardK\SETUP\OPTION.ini";
         private string HttpPort => ConfigurationManager.AppSettings["SignPadPicker.EasyCardKSignPadAdaptor.HttpPort"] ?? "8090";
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
                 HttpPort = int.Parse(GetPort()),
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             if (!RunSignPadAppIfNotRunning())
             {

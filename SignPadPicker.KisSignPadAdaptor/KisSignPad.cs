@@ -3,6 +3,7 @@ using SignPadPicker.Extensions;
 using System;
 using System.Configuration;
 using System.Text;
+using System.Windows;
 
 namespace SignPadPicker.Adaptor
 {
@@ -50,7 +51,7 @@ namespace SignPadPicker.Adaptor
         private string Message3 => ConfigurationManager.AppSettings["SignPadPicker.KisSignPadAdaptor.Message3"] ?? "";
         private string Message4 => ConfigurationManager.AppSettings["SignPadPicker.KisSignPadAdaptor.Message4"] ?? "";
 
-        public string Activate()
+        public string Activate(Window owner = null)
         {
             SignPadConfig config = new SignPadConfig
             {
@@ -62,10 +63,10 @@ namespace SignPadPicker.Adaptor
                 Message4 = Message4,
             };
 
-            return Activate(config);
+            return Activate(config, owner);
         }
 
-        public string Activate(SignPadConfig config)
+        public string Activate(SignPadConfig config, Window owner = null)
         {
             //! 전문에 입력할 길이제한으로 `Path.GetTempPath()` 사용불가
             string filePath = TEMP_SIGN_FILE_PATH;
