@@ -60,6 +60,7 @@ namespace SignPadPicker.Adaptor
                 Message2 = Message2,
                 Message3 = Message3,
                 Message4 = Message4,
+                ImgFilePath = TEMP_SIGN_FILE_PATH,
             };
 
             return Activate(config);
@@ -68,7 +69,7 @@ namespace SignPadPicker.Adaptor
         public string Activate(SignPadConfig config)
         {
             //! 전문에 입력할 길이제한으로 `Path.GetTempPath()` 사용불가
-            string filePath = TEMP_SIGN_FILE_PATH;
+            string filePath = config.ImgFilePath;
 
             StringBuilder sb = new StringBuilder();
             sb.Append("0".PadLeft(8, ' ')); //금액 8자리

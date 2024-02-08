@@ -17,5 +17,7 @@
         public string Message4 { get; set; }
 
         public string ImgFilePath { get; set; }
+
+        public string License { get; set; }
     }
 }

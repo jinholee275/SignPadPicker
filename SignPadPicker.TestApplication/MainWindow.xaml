@@ -22,6 +22,7 @@
                 <Button Content="SmartroSignPad" Click="ActivateBtn_Click" Tag="SmartroSignPad" />
                 <Button Content="KocesSignPad" Click="ActivateBtn_Click" Tag="KocesSignPad" />
                 <Button Content="KisSignPad" Click="ActivateBtn_Click" Tag="KisSignPad" />
+                <Button Content="WacomSignPad" Click="ActivateBtn_Click" Tag="WacomSignPad" />
             </StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
