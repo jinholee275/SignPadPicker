@@ -50,7 +50,7 @@ namespace SignPadPicker.Adaptor
 
         public string Activate(SignPadConfig config, Window owner = null)
         {
-            Window win = CreateWindow(owner);
+            Window win = CreateWindow(owner, config);
 
             _ = win.ShowDialog();
 
@@ -71,9 +71,11 @@ namespace SignPadPicker.Adaptor
             throw new SignCancelException();
         }
 
-        private Window CreateWindow(Window owner = null)
+        private Window CreateWindow(SignPadConfig config, Window owner = null)
         {
-            Size winSize = new Size(500, 380);
+            Size winSize = new Size(
+                width: double.IsNaN(config.ScreenSizeWidth) ? 500 : config.ScreenSizeWidth,
+                height: double.IsNaN(config.ScreenSizeHeight) ? 380 : config.ScreenSizeHeight);
 
             Window win = new Window
             {
@@ -81,13 +83,16 @@ namespace SignPadPicker.Adaptor
                 ShowInTaskbar = false,
                 WindowStartupLocation = WindowStartupLocation.CenterOwner,
                 ResizeMode = ResizeMode.NoResize,
-                Left = Screen.PrimaryScreen.WorkingArea.Left
-                    + Screen.PrimaryScreen.WorkingArea.Width / 2 - winSize.Width / 2,
-                Top = Screen.PrimaryScreen.WorkingArea.Top
-                    + Screen.PrimaryScreen.WorkingArea.Height / 2 - winSize.Height / 2,
+                Left = double.IsNaN(config.ScreenPositionLeft)
+                    ? (Screen.PrimaryScreen.WorkingArea.Left + Screen.PrimaryScreen.WorkingArea.Width / 2 - winSize.Width / 2)
+                    : config.ScreenPositionLeft,
+                Top = double.IsNaN(config.ScreenPositionTop)
+                    ? (Screen.PrimaryScreen.WorkingArea.Top + Screen.PrimaryScreen.WorkingArea.Height / 2 - winSize.Height / 2)
+                    : config.ScreenPositionTop,
                 Width = winSize.Width,
                 Height = winSize.Height,
                 WindowStyle = WindowStyle.None,
+                WindowState = config.ScreenIsMaximized ? WindowState.Maximized : WindowState.Normal,
             };
 
             NiceSignPadUserControl uc = new NiceSignPadUserControl();
