@@ -72,7 +72,10 @@ namespace SignPadPicker.TestApplication
                         : SignPadLoader.GetPlugin(name: pluginName);
                 }
 
-                string filePath = plugin.Activate();
+                string filePath = plugin.Activate(owner: this, config: new SignPadConfig
+                {
+                    ScreenIsMaximized = CbxIsMaximized.IsChecked ?? false,
+                });
 
                 SetResults(filePath, new string[] { });
             }

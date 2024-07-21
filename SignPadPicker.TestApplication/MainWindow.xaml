@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Horizontal">
-            <StackPanel Width="260">
+        <DockPanel>
+            <StackPanel Width="260" DockPanel.Dock="Left">
                 <Button Content="Activate any signpad" Click="ActivateBtn_Click" Tag="" />
                 <Button Content="ScreenSignPad" Click="ActivateBtn_Click" Tag="ScreenSignPad" />
                 <Button Content="MspSignPad,MipSignPad" Click="ActivateBtn_Click" Tag="MspSignPad,MipSignPad" />
@@ -23,6 +23,9 @@
                 <Button Content="KocesSignPad" Click="ActivateBtn_Click" Tag="KocesSignPad" />
                 <Button Content="KisSignPad" Click="ActivateBtn_Click" Tag="KisSignPad" />
                 <Button Content="SCSProSignPad" Click="ActivateBtn_Click" Tag="SCSProSignPad" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <CheckBox x:Name="CbxIsMaximized" Content="IsMaximized" />
             </StackPanel>
             <Grid>
                 <Grid.RowDefinitions>
@@ -40,6 +43,6 @@
                     <Image x:Name="SignImage" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                 </Border>
             </Grid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>
