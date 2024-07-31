@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Ink;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace SignPadPicker.Adaptor
@@ -13,9 +14,9 @@ namespace SignPadPicker.Adaptor
     public class ScreenSignPadViewModel : NotifyPropertyImpl
     {
         #region Properties
-        
+
         public Window Owner { get; set; }
-        
+
         public SignResult Result { get; set; }
 
         private string confirmBtnContent = "저장";
@@ -91,6 +92,17 @@ namespace SignPadPicker.Adaptor
                 };
 
                 SignPad.SetBinding(InkCanvas.StrokesProperty, new Binding("Strokes") { Source = this, Mode = BindingMode.TwoWay });
+
+                // Set ink brush
+                DrawingAttributes inkDA = new DrawingAttributes
+                {
+                    Color = Colors.Black, // Set the ink color to black
+                    Width = 20,           // Set the ink width
+                    Height = 20,          // Set the ink height
+                    StylusTip = StylusTip.Rectangle
+                };
+                SignPad.DefaultDrawingAttributes = inkDA;
+
             }), DispatcherPriority.Input);
         }
 
@@ -103,9 +115,9 @@ namespace SignPadPicker.Adaptor
             }
 
             string filePath = Path.Combine(Path.GetTempPath(), DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg");
-            
+
             SignPad.ToSaveAsImage(filePath);
-            
+
             Result = new SignResult
             {
                 SignImgFilePath = filePath,
