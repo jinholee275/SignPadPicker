@@ -43,6 +43,11 @@ namespace SignPadPicker.Adaptor
             {
                 ComPort = ComPort,
                 ComSpeed = ComSpeed,
+                ScreenSizeWidth = double.NaN,
+                ScreenSizeHeight = double.NaN,
+                ScreenPositionLeft = double.NaN,
+                ScreenPositionTop = double.NaN,
+                ScreenIsMaximized = false,
             };
 
             return Activate(config, owner);
@@ -50,7 +55,7 @@ namespace SignPadPicker.Adaptor
 
         public string Activate(SignPadConfig config, Window owner = null)
         {
-            Window win = CreateWindow(owner, config);
+            Window win = CreateWindow(config, owner);
 
             _ = win.ShowDialog();
 
