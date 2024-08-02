@@ -16,7 +16,16 @@ namespace SignPadPicker.Adaptor
 
         public string Activate(Window owner = null)
         {
-            return Activate(config: null, owner);
+            SignPadConfig config = new SignPadConfig
+            {
+                ScreenSizeWidth = double.NaN,
+                ScreenSizeHeight = double.NaN,
+                ScreenPositionLeft = double.NaN,
+                ScreenPositionTop = double.NaN,
+                ScreenIsMaximized = false,
+            };
+
+            return Activate(config, owner);
         }
 
         public string Activate(SignPadConfig config, Window owner = null)
