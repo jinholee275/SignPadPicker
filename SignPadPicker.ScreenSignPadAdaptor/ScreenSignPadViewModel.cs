@@ -92,17 +92,21 @@ namespace SignPadPicker.Adaptor
                 };
 
                 SignPad.SetBinding(InkCanvas.StrokesProperty, new Binding("Strokes") { Source = this, Mode = BindingMode.TwoWay });
+            }), DispatcherPriority.Input);
+        }
 
+        public void SetBrushSize(double brushSize)
+        {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
                 // Set ink brush
-                DrawingAttributes inkDA = new DrawingAttributes
+                SignPad.DefaultDrawingAttributes = new DrawingAttributes
                 {
                     Color = Colors.Black, // Set the ink color to black
-                    Width = 20,           // Set the ink width
-                    Height = 20,          // Set the ink height
-                    StylusTip = StylusTip.Rectangle
+                    Width = brushSize,    // Set the ink width
+                    Height = brushSize,   // Set the ink height
+                    StylusTip = StylusTip.Ellipse
                 };
-                SignPad.DefaultDrawingAttributes = inkDA;
-
             }), DispatcherPriority.Input);
         }
 

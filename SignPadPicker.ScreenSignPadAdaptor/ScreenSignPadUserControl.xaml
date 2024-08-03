@@ -26,7 +26,8 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <ContentControl Content="{Binding SignPad}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,0"></ContentControl>
+        <ContentControl Content="{Binding SignPad}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,10,10,0"
+                        MouseEnter="ContentControl_MouseEnter" MouseLeave="ContentControl_MouseLeave" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="1" Margin="5,0">
             <Button Content="{Binding ConfirmBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ConfirmCommand}" Style="{StaticResource SaveButtonStyle}" />
             <Button Content="{Binding ClearBtnContent}" Width="100" Height="30" Margin="5" Command="{Binding ClearCommand}" Style="{StaticResource DeleteButtonStyle}" />
