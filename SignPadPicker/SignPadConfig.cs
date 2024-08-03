@@ -46,5 +46,10 @@
         /// 창의 상태를 최대 크기로 설정하는지 여부
         /// </summary>
         public bool ScreenIsMaximized { get; set; } = false;
+
+        /// <summary>
+        /// 펜 브러쉬 크기
+        /// </summary>
+        public double PenBrushSize { get; set; } = 5;
     }
 }

@@ -1,6 +1,12 @@
-﻿using SignPadPicker.Exceptions;
+﻿using Microsoft.Win32.SafeHandles;
+using SignPadPicker.Exceptions;
+using System;
+using System.Drawing;
 using System.Windows;
+using System.Windows.Input;
+using System.Windows.Interop;
 using Screen = System.Windows.Forms.Screen;
+using Size = System.Windows.Size;
 
 namespace SignPadPicker.Adaptor
 {
@@ -80,6 +86,7 @@ namespace SignPadPicker.Adaptor
             if (uc.DataContext is ScreenSignPadViewModel viewModel)
             {
                 viewModel.Owner = win;
+                viewModel.SetBrushSize(config.PenBrushSize);
             }
 
             win.Content = uc;

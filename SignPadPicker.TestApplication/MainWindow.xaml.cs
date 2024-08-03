@@ -72,9 +72,12 @@ namespace SignPadPicker.TestApplication
                         : SignPadLoader.GetPlugin(name: pluginName);
                 }
 
+                bool isMaximized = CbxIsMaximized.IsChecked ?? false;
+
                 string filePath = plugin.Activate(owner: this, config: new SignPadConfig
                 {
-                    ScreenIsMaximized = CbxIsMaximized.IsChecked ?? false,
+                    ScreenIsMaximized = isMaximized,
+                    PenBrushSize = isMaximized ? 15 : 5,
                 });
 
                 SetResults(filePath, new string[] { });
