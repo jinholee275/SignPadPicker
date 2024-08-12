@@ -3,6 +3,7 @@ using SignPadPicker.Extensions;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows;
@@ -163,6 +164,48 @@ namespace SignPadPicker.Adaptor
             finally
             {
                 FD_SignPadSearch();
+
+                // 로컬 서명 이미지 파일 삭제
+                try
+                {
+
+                    string assemblyDirectorys = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                    string[] bmpFiles = Directory.GetFiles(assemblyDirectorys, "*.bmp");
+
+                    foreach (string bmpFile in bmpFiles)
+                    {
+                        if (bmpFile != signImgPath && File.Exists(bmpFile))
+                        {
+                            File.Delete(bmpFile);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"파일 삭제 실패: {ex.Message}");
+                }
+
+                // 로컬 로그 폴더 삭제
+                try
+                {
+                    // 로그 파일 폴더 찾기
+                    string assemblyPath = Assembly.GetExecutingAssembly().Location;
+                    string assemblyDirectory = Path.GetDirectoryName(assemblyPath);
+
+                    string logFolderPath = Path.Combine(assemblyDirectory, "signpadlog");
+
+
+                    if (Directory.Exists(logFolderPath))
+                    {
+                        Directory.Delete(logFolderPath, true); // true: 하위 디렉토리 및 파일도 삭제
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    // 폴더 삭제 실패 시 로그에 기록
+                    Console.WriteLine($"로그 폴더 삭제 실패: {ex.Message}");
+                }
             }
 
             if (signRetVal < 0)
